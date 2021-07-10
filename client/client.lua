@@ -33,12 +33,13 @@ local vehicleshopCoords = {
 Citizen.CreateThread(
     function()
         while true do
-            Citizen.Wait(3)
+            local sleep = 2000
             local ped = PlayerPedId()
             for i = 1, #vehicleshopCoords do
             local actualShop = vehicleshopCoords[i]
             local dist = #(actualShop - GetEntityCoords(ped))
                 if dist <= 50.0 then                    
+		sleep = 3
                     if dist <= 4.0 then                 
                         DrawText3Ds(actualShop.x, actualShop.y, actualShop.z,"PRESS ~r~E~w~ TO OPEN VEHICLE SHOP")
                     end
@@ -50,6 +51,7 @@ Citizen.CreateThread(
                     end
                 end
             end
+	    Citizen.Wait(sleep)
         end
     end
 )
